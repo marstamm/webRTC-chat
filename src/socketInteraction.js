@@ -51,6 +51,10 @@ const initialize = (webcamStream, callback) => {
       new RTCSessionDescription(data.offer)
     );
     const answer = await peerConnection.createAnswer();
+    answer.sdp = answer.sdp.replace(
+      "useinbandfec=1",
+      "useinbandfec=1; stereo=1; maxaveragebitrate=510000"
+    );
     await peerConnection.setLocalDescription(new RTCSessionDescription(answer));
     console.log("awnsering", data.from);
 

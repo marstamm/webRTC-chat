@@ -7,9 +7,14 @@ const root = document.documentElement;
 
 const constraints = {
   audio: {
-    autoGainControl: true,
-    sampleSize: 24,
-    echoCancellation: true,
+    autoGainControl: false,
+    channelCount: 2,
+    echoCancellation: false,
+    latency: 0,
+    noiseSuppression: false,
+    sampleRate: 48000,
+    sampleSize: 16,
+    volume: 1.0,
   },
   video: {
     width: { ideal: 1280 },
