@@ -1,0 +1,27 @@
+:root {
+  --rows: 0;
+}
+
+body {
+  margin: 0;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#container video {
+  align-self: auto;
+  flex-shrink: 1;
+  padding: 1px;
+  max-width: calc((100% / var(--rows)) - 2px);
+  max-height: calc((100% / var(--rows)) - 2px);
+  width: calc((100% / var(--rows)) - 2px);
+  height: calc((100% / var(--rows)) - 2px);
+}
