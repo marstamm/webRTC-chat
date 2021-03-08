@@ -2,13 +2,15 @@ import { initialize as initializeSocket } from "./socketInteraction";
 
 const streams = {};
 const videoElements = {};
-const peerConnections = [];
-const users = [];
 const container = document.getElementById("container");
 const root = document.documentElement;
 
 const constraints = {
-  audio: true,
+  audio: {
+    autoGainControl: true,
+    sampleSize: 24,
+    echoCancellation: true,
+  },
   video: {
     width: { ideal: 1280 },
     height: { ideal: 720 },
