@@ -69,6 +69,7 @@ const initialize = (webcamStream, callback) => {
     );
 
     if (!established.includes(data.from)) {
+      // Call back to setup 2-way communication
       call(data.from);
       established.push(data.from);
     }
