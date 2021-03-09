@@ -18,7 +18,9 @@ const initialize = (webcamStream, callback) => {
     if (peerConnections[id]) {
       return peerConnections[id];
     }
-    const connection = new RTCPeerConnection();
+    const connection = new RTCPeerConnection({
+      iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
+    });
     webcamStream
       .getTracks()
       .forEach((track) => connection.addTrack(track, webcamStream));
