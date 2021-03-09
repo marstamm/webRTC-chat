@@ -17,6 +17,7 @@ body {
 }
 
 #container video {
+  filter: drop-shadow(2px 4px 6px black);
   align-self: auto;
   flex-shrink: 1;
   padding: 1px;
