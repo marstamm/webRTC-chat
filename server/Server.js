@@ -21,6 +21,18 @@ module.exports = class Server {
         methods: ["GET", "POST"],
       },
     });
+
+    this.app.enable("trust proxy");
+    this.app.use(function (request, response, next) {
+      console.log(process.env.NODE_ENV);
+      if (process.env.NODE_ENV === "production" && !request.secure) {
+        return response.redirect(
+          "https://" + request.headers.host + request.url
+        );
+      }
+      next();
+    });
+
     this.app.use(express.static(path.join(__dirname, "../public")));
   }
 
