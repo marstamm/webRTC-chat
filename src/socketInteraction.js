@@ -19,7 +19,7 @@ const initialize = (webcamStream, callback) => {
       return peerConnections[id];
     }
     const connection = new RTCPeerConnection({
-      iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
+      iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
     });
     webcamStream
       .getTracks()
@@ -82,6 +82,9 @@ const initialize = (webcamStream, callback) => {
   });
 
   socket.on("disconnected", async ({ id }) => {
+    peerConnections[id].close();
+    delete peerConnections[id];
+
     callback({ event: "disconnected", id });
   });
 };
