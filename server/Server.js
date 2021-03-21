@@ -24,7 +24,6 @@ module.exports = class Server {
 
     this.app.enable("trust proxy");
     this.app.use(function (request, response, next) {
-      console.log(process.env.NODE_ENV);
       if (process.env.NODE_ENV === "production" && !request.secure) {
         return response.redirect(
           "https://" + request.headers.host + request.url
@@ -38,9 +37,6 @@ module.exports = class Server {
 
   handleSocketConnection() {
     this.io.on("connection", (socket) => {
-      console.log("Socket connected.");
-    });
-    this.io.on("connection", (socket) => {
       const existingSocket = this.activeSockets.find(
         (existingSocket) => existingSocket === socket.id
       );
@@ -48,22 +44,11 @@ module.exports = class Server {
       if (!existingSocket) {
         this.activeSockets.push(socket.id);
 
-        socket.emit("update-user-list", {
-          users: this.activeSockets.filter(
-            (existingSocket) => existingSocket !== socket.id
-          ),
-        });
-
         socket.broadcast.emit("joined", {
           user: socket.id,
         });
 
-        socket.broadcast.emit("update-user-list", {
-          users: [socket.id],
-        });
-
         socket.on("call-user", (data) => {
-          console.log("call user", data.to);
           socket.to(data.to).emit("call-offer", {
             offer: data.offer,
             from: socket.id,

@@ -58,7 +58,6 @@ const initialize = (webcamStream, callback) => {
       "useinbandfec=1; stereo=1; maxaveragebitrate=510000"
     );
     await peerConnection.setLocalDescription(new RTCSessionDescription(answer));
-    console.log("awnsering", data.from);
 
     socket.emit("make-answer", {
       answer,
@@ -69,7 +68,6 @@ const initialize = (webcamStream, callback) => {
   socket.on("answer-made", async (data) => {
     const peerConnection = getPeerConnection(data.from);
 
-    console.log("answer=received", data);
     await peerConnection.setRemoteDescription(
       new RTCSessionDescription(data.answer)
     );

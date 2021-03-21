@@ -37,7 +37,6 @@ const updateView = () => {
   const elements = Object.entries(videoElements);
   root.style.setProperty("--rows", Math.ceil(Math.sqrt(elements.length)));
   elements.forEach(([key, value]) => {
-    console.log(key, value);
     if (!document.getElementById(key)) {
       container.appendChild(value);
     }
@@ -51,7 +50,6 @@ const handleRemoteVideo = ({ id, event, stream }) => {
   }
   if (event === "disconnected") {
     delete streams[id];
-    console.log("remove", videoElements[id]);
     delete videoElements[id];
     document.getElementById(id).remove();
   }
@@ -61,8 +59,6 @@ const handleRemoteVideo = ({ id, event, stream }) => {
 navigator.mediaDevices
   .getUserMedia(constraints)
   .then((stream) => {
-    console.log(stream);
-
     streams["__own"] = stream;
     videoElements["__own"] = createVideoElement(stream, "__own", true);
     updateView();
