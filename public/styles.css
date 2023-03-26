@@ -26,3 +26,7 @@ body {
   width: calc((100% / var(--rows)) - 2px);
   height: calc((100% / var(--rows)) - 2px);
 }
+
+#__own {
+ transform: scaleX(-1); 
+}
